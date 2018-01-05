@@ -20,7 +20,6 @@ export class CardListComponent implements OnInit, OnDestroy {
       console.log('Card received');
       console.log(card);
       this.cards[card.cardId] = card;
-      this.cards[card.cardId].loading = false;
     });
   }
 

@@ -9,14 +9,13 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
   
-  socket.on('add-message', (message) => {
-	console.log('Message emitted: ' + message.text);
-    io.emit('message', message);    
-  });
-  
   socket.on('create-card', (card) => {
 	console.log('New Card: ' + card.title);
-    setTimeout(() => {io.emit('new-card', card)}, 5000);    
+    io.emit('new-card', card);
+    setTimeout(() => {
+      card.loading = false;
+      io.emit('new-card', card);
+    }, 5000);
   });
   
 });
