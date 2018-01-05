@@ -11,7 +11,6 @@ export class CardListComponent implements OnInit, OnDestroy {
 
   public connection;
   public cards = [];
-  public card = {title: '', description: '', image: '', cardId: -1, loading: true};
 
   constructor(private websocketService: WebsocketService) {}
 
@@ -19,7 +18,15 @@ export class CardListComponent implements OnInit, OnDestroy {
     this.connection = this.websocketService.getCards().subscribe(card => {
       console.log('Card received');
       console.log(card);
-      this.cards[card.cardId] = card;
+      if (card.status === 'Creating') {
+        this.cards.push(card);
+      }
+      else if (card.status === 'Created') {
+        this.cards[card.cardId].status = card.status;
+      }
+      else if (card.status === 'Reloading') {
+        this.cards[card.cardId].status = card.status;
+      }
     });
   }
 
@@ -27,13 +34,15 @@ export class CardListComponent implements OnInit, OnDestroy {
     this.connection.unsubscribe();
   }
 
-  public addCard() {
+  public addCard(card) {
     console.log('Add card');
-    this.card.cardId = this.generateId();
-    console.log(this.card);
-    this.cards.push(this.card);
-    this.websocketService.addCard(this.card);
-    this.card = {title: '', description: '', image: '', cardId: -1, loading: true};
+    card.cardId = this.generateId();
+    console.log(card);
+    this.websocketService.addCard(card);
+  }
+  public reloadCard(cardId) {
+    console.log('reload card');
+    this.websocketService.reloadCard({cardId: cardId, status: 'Reloading'});
   }
 
   private generateId() {

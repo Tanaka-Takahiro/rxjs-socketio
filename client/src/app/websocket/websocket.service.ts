@@ -10,6 +10,11 @@ export class WebsocketService {
     this.socket.emit('create-card', card);
   }
 
+  reloadCard(card) {
+    console.log('socket reload');
+    this.socket.emit('reload-card', card);
+  }
+
   getCards() {
     const observable = new Observable(observer => {
       this.socket = io(this.url);

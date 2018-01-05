@@ -1,0 +1,22 @@
+<h4>Create New Card</h4>
+<form>
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label" for="name">Name</label>
+    <div class="col-sm-9">
+      <input [(ngModel)]="card.title" name="title" class="form-control" id="name" placeholder="Name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label" for="description">Description</label>
+    <div class="col-sm-9">
+      <input [(ngModel)]="card.description" name="description" class="form-control" id="description" placeholder="Description">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label" for="image">Image</label>
+    <div class="col-sm-9">
+      <input [(ngModel)]="card.image" name="image" class="form-control" id="image" placeholder="Image">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="triggerSave()">Add Card</button>
+</form>

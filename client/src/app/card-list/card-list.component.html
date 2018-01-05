@@ -1,9 +1,12 @@
-<div class="card-deck">
-  <div *ngFor="let card of cards">
-    <app-card [card]="card"></app-card>
+<div class="main-content row col-sm-12">
+  <div *ngIf="cards.length > 0" class="card-deck col-sm-7">
+    <div *ngFor="let card of cards">
+      <app-card [card]="card" (onReload)="reloadCard($event)"></app-card>
+    </div>
+  </div>
+  <div class="col-sm-5">
+    <app-create-card (onSave)="addCard($event)"></app-create-card>
   </div>
 </div>
-<input [(ngModel)]="card.title"/>
-<input [(ngModel)]="card.description"/>
-<input [(ngModel)]="card.image"/>
-<button (click)="addCard()">Add</button>
+
+

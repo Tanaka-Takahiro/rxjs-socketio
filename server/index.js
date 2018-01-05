@@ -13,8 +13,17 @@ io.on('connection', (socket) => {
 	console.log('New Card: ' + card.title);
     io.emit('new-card', card);
     setTimeout(() => {
-      card.loading = false;
+      card.status = 'Created';
       io.emit('new-card', card);
+    }, 5000);
+  });
+
+  socket.on('reload-card', (card) => {
+    console.log('Card to reload: ' + card.cardId);
+    io.emit('new-card', card);
+    setTimeout(() => {
+        card.status = 'Created';
+    io.emit('new-card', card);
     }, 5000);
   });
   
