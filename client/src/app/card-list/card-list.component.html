@@ -1,0 +1,9 @@
+<div class="card-deck">
+  <div *ngFor="let card of cards">
+    <app-card [card]="card"></app-card>
+  </div>
+</div>
+<input [(ngModel)]="card.title"/>
+<input [(ngModel)]="card.description"/>
+<input [(ngModel)]="card.image"/>
+<button (click)="addCard()">Add</button>
