@@ -6,6 +6,10 @@ export class WebsocketService {
   private url = 'http://localhost:3000';
   private socket;
 
+  constructor() {
+    this.socket = io(this.url);
+  }
+
   addCard(card) {
     this.socket.emit('create-card', card);
   }
@@ -17,7 +21,6 @@ export class WebsocketService {
 
   getCards() {
     const observable = new Observable(observer => {
-      this.socket = io(this.url);
       this.socket.on('new-card', (data) => {
         observer.next(data);
       });

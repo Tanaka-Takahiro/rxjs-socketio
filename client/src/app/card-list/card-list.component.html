@@ -1,12 +1,16 @@
 <div class="main-content row col-sm-12">
+  <div class="buttons-header col-sm-12">
+    <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" href="#">
+      <i class="fa fa-plus"></i> Add new card
+    </a>
+  </div>
   <div *ngIf="cards.length > 0" class="card-deck col-sm-7">
     <div *ngFor="let card of cards">
       <app-card [card]="card" (onReload)="reloadCard($event)"></app-card>
     </div>
   </div>
-  <div class="col-sm-5">
-    <app-create-card (onSave)="addCard($event)"></app-create-card>
-  </div>
 </div>
 
-
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <app-create-card (onSave)="addCard($event)"></app-create-card>
+</div>

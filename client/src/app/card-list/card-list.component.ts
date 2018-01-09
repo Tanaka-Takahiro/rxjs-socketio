@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../websocket/websocket.service';
+import { Card } from '../models/card'
 
 @Component({
   selector: 'app-card-list',
@@ -15,7 +16,7 @@ export class CardListComponent implements OnInit, OnDestroy {
   constructor(private websocketService: WebsocketService) {}
 
   ngOnInit() {
-    this.connection = this.websocketService.getCards().subscribe(card => {
+    this.connection = this.websocketService.getCards().subscribe((card: Card) => {
       console.log('Card received');
       console.log(card);
       if (card.status === 'Creating') {
