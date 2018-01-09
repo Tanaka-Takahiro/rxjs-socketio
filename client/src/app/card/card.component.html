@@ -1,6 +1,8 @@
 <div class="card person-card">
-  <div class="loader" *ngIf="card.status == 'Creating' || card.status == 'Reloading'"></div>
-  <div *ngIf="card.status == 'Created'">
+  <div class="overlay" *ngIf="card.status == 'Creating' || card.status == 'Reloading'">
+    <div class="loader"></div>
+  </div>
+  <div [ngClass]="{'blur': card.status == 'Creating' || card.status == 'Reloading'}">
     <img class="card-img-top" src={{card.image}} alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{card.title}}</h5>

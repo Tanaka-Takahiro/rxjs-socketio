@@ -4,7 +4,7 @@
       <i class="fa fa-plus"></i> Add new card
     </a>
   </div>
-  <div *ngIf="cards.length > 0" class="card-deck col-sm-7">
+  <div *ngIf="cards.length > 0" class="card-deck col-sm-12">
     <div *ngFor="let card of cards">
       <app-card [card]="card" (onReload)="reloadCard($event)"></app-card>
     </div>
